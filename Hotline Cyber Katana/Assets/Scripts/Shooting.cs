@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shooting : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class Shooting : MonoBehaviour
     GameObject Bullet;
     bool allowfire = true;
     public float ScaleRateOFFire;
+    public Text UIAmmo;
+    public int ammo = 20;
     void Update()
     {
         if (Input.GetButton("Fire1") && (allowfire))
@@ -22,16 +25,31 @@ public class Shooting : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
-
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Reload();
+        }
+        UIAmmo.text = "20/"+ ammo;
+        
     }
 
-    void Shoot()
+    public void Reload()
     {
-        allowfire = false;
-        Bullet = Instantiate(BulletPrefab, transform.position, transform.rotation);
-        gameObject.GetComponent<AudioSource>().Play();
-        StartCoroutine(RateOfFire());
-        
+        ammo = 20;
+    }
+
+    public void Shoot()
+    {
+        if (ammo > 0)
+        {
+
+            allowfire = false;
+            Bullet = Instantiate(BulletPrefab, transform.position, transform.rotation);
+            gameObject.GetComponent<AudioSource>().Play();
+            ammo--;
+            StartCoroutine(RateOfFire());
+        }
+        //else Reload();
     }
     IEnumerator RateOfFire()
     {

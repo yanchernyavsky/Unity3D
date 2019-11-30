@@ -6,6 +6,8 @@ public class BulletScript : MonoBehaviour
 {
     public float speed = 10f;
     public GameObject SparksPrefab;
+    public GameObject BloodSplat;
+    GameObject _bloodSplat;
     GameObject sparks;
 
     void Start()
@@ -26,9 +28,17 @@ public class BulletScript : MonoBehaviour
         Destroy(gameObject);
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            EnemyScript enemy = collision.gameObject.GetComponent<EnemyScript>();
+            collision.gameObject.GetComponent<EnemyScript>().EnemyDeath();
+            _bloodSplat = Instantiate(BloodSplat, collision.transform.position,Quaternion.Euler(gameObject.transform.rotation.x, gameObject.transform.rotation.y, gameObject.transform.rotation.z+50f));
+            _bloodSplat.transform.parent = null;
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerController>().Death();
+            _bloodSplat = Instantiate(BloodSplat, collision.transform);
+            _bloodSplat.transform.parent = null;
 
-            enemy.EnemyDeath();
+
         }
     }
 }

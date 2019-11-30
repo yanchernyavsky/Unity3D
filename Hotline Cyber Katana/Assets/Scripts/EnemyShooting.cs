@@ -8,26 +8,32 @@ public class EnemyShooting : MonoBehaviour
     GameObject Bullet;
     bool allowfire = true;
     public float ScaleRateOFFire;
+    public int ammo = 20;
 
-    private void Update()
-    {
-        if (true)
-        {
-
-        }
-    }
     public void Shoot()
     {
-        if(allowfire)
-        {
+        if (allowfire)
+            if (ammo > 0)
+            {
 
-        allowfire = false;
-        Bullet = Instantiate(BulletPrefab, transform.position, transform.rotation);
-        gameObject.GetComponent<AudioSource>().Play();
-        StartCoroutine(RateOfFire());
 
-        }
+                {
+
+                    allowfire = false;
+                    Bullet = Instantiate(BulletPrefab, transform.position, transform.rotation);
+                    gameObject.GetComponent<AudioSource>().Play();
+                    ammo--;
+                    StartCoroutine(RateOfFire());
+
+                }
+            }
+            else Reload();
     }
+    void Reload()
+    {
+        ammo = 20;
+    } 
+
     IEnumerator RateOfFire()
     {
         yield return new WaitForSeconds(ScaleRateOFFire);

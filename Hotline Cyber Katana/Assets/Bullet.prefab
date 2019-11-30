@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3820635455980914117}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,6 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 30
   SparksPrefab: {fileID: 4382370569301706397, guid: ee9686470eec6f0459cec61ff056a3b9,
+    type: 3}
+  BloodSplat: {fileID: 3452949772291302470, guid: fa2749a9d66c15349b7cd5242e87bb32,
     type: 3}
 --- !u!50 &8179475771163115867
 Rigidbody2D:
