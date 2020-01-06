@@ -15,7 +15,12 @@ public class SceneController : MonoBehaviour
         CurrentScene = SceneManager.GetActiveScene();
     }
 
-    // Update is called once per frame
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(CurrentScene.buildIndex + 1);
+
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -26,6 +31,10 @@ public class SceneController : MonoBehaviour
                 Time.timeScale = 1f;
             }
             
+        }
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && CurrentScene.buildIndex != 0)
+        {
+            LoadNextScene();
         }
     }
 }

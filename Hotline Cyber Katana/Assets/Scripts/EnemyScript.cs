@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -13,8 +14,6 @@ public class EnemyScript : MonoBehaviour
     private Transform LastPlayerPosition;
     [SerializeField]
     private EnemyShooting enemyShooting;
-    [SerializeField]
-    private Sprite Blood;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -46,7 +45,8 @@ public class EnemyScript : MonoBehaviour
     }
    
     public void EnemyDeath()
-    {
+    {   
+        
         Destroy(gameObject, 0.2f);
     }
 }

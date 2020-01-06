@@ -11,6 +11,8 @@ public class Shooting : MonoBehaviour
     public float ScaleRateOFFire;
     public Text UIAmmo;
     public int ammo = 20;
+    public AudioSource ReloadSound;
+    public AudioSource ShootSound;
     void Update()
     {
         if (Input.GetButton("Fire1") && (allowfire))
@@ -35,7 +37,9 @@ public class Shooting : MonoBehaviour
 
     public void Reload()
     {
+        if (ammo != 20) ReloadSound.Play();
         ammo = 20;
+
     }
 
     public void Shoot()
@@ -45,7 +49,7 @@ public class Shooting : MonoBehaviour
 
             allowfire = false;
             Bullet = Instantiate(BulletPrefab, transform.position, transform.rotation);
-            gameObject.GetComponent<AudioSource>().Play();
+            ShootSound.Play();
             ammo--;
             StartCoroutine(RateOfFire());
         }
